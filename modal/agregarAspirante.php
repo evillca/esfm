@@ -139,3 +139,5 @@ $nivel = mysqli_query($conexion, $nivel_consulta);
   </div>
 </div>
 </form>
+
+

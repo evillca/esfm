@@ -73,6 +73,34 @@ include 'modal/modificarPostulante.php';
 
 $(document).ready(function () {
         load(1);
+
+
+        $('#nrodocumento').keyup(function() { 
+            $.ajax({
+                type:"POST",
+                data:"numeroDoc=" + $('#nrodocumento').val(),
+                url:"ajax/obtenerInformacionAspirante.php",
+                success:function(respuesta) {
+                    
+                    respuesta = jQuery.parseJSON(respuesta);
+                    
+                    if (typeof respuesta == "object") {
+                        $('#nombre1').val(respuesta[0]['nombre1']);
+                        $('#nombre2').val(respuesta[0]['nombre2']);
+                        $('#appaterno').val(respuesta[0]['appaterno']);
+                        $('#apmaterno').val(respuesta[0]['apmaterno']);
+                        $('#expedido_en').val(respuesta[0]['expedido_en']);
+                        $('#fecha_nacimiento').val(respuesta[0]['fecha_nacimiento']);
+                        $('#genero').val(respuesta[0]['genero']);
+                        
+                        
+                    }
+                    
+                }
+            });
+        }) 
+            
+
     });
     function load(page) {
          
@@ -201,5 +229,7 @@ $(document).ready(function () {
     });
     
 
+
+
 	</script>
- 
+
