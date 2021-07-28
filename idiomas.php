@@ -93,7 +93,7 @@ $(document).ready(function () {
             var parametros = $(this).serialize();
             $.ajax({
                 type: "POST",
-                url: "actions/agregarUsuario.php",
+                url: "actions/agregarIdioma.php",
                 data: parametros,
                 
                 success: function (r) {
