@@ -1,8 +1,8 @@
 <?php
   $servidor= 'localhost';
   $usuario= 'root';
-  $password='autodidacta';
-  $bd='tramites_db';
+  $password='';
+  $bd='penelope_db';
   $conexion = @mysqli_connect($servidor, $usuario,$password,$bd);
   $conexion->query("SET NAMES 'utf8'");
 /*  if($conexion){

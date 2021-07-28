@@ -1,8 +1,8 @@
 <?php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'autodidacta');
-define('DB_NAME', 'tramites_db');
+define('DB_PASS', '');
+define('DB_NAME', 'penelope_db');
 
 class Login {
 

@@ -2,6 +2,7 @@
 
 include '../conexion.php';
 
+$id_ciudadano = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['id_ciudadano'], ENT_QUOTES)));
 $nombre1 = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['nombre1'], ENT_QUOTES)));
 $nombre2 = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['nombre2'], ENT_QUOTES)));
 $appaterno = mysqli_real_escape_string($conexion, (strip_tags($_REQUEST['appaterno'], ENT_QUOTES)));
@@ -21,11 +22,26 @@ if($nombre2 == "" && $nombre2=null){
 }else{
     $nombre2;
 }
-//generar codigo certificado
-//$minusculas='abcdefghijklmnopqrstuvwxyz';
-//$caracteres = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
-//$generado=substr(str_shuffle($caracteres), 0,9);
-$sql1="INSERT INTO ciudadanonacional SET id_ciudadano=null, 
+if($id_ciudadano>0){
+    $sql= "INSERT INTO solicitudes(id_ciudadano,esfm_postula,idioma,modalidad,user_update)
+                VALUES('".$id_ciudadano."',
+                        '".$esfm_postula."',
+                        '".$idioma."',
+                        '".$modalidad."',
+                        '".$id_usuario."'
+                         )";
+                        
+    $sql3 = "INSERT INTO solicitudes SET id_ciudadano='".$id_ciudadano."',
+                                        esfm_postula='".$esfm_postula."',
+                                        idioma='".$idioma."',
+                                        modalidad='".$modalidad."',
+                                        user_update='".$id_usuario."',
+                                        id_ciudadano='".$nrodocumento."'
+                                        ";
+    echo $ejecutar_insercion = mysqli_query($conexion, $sql);
+
+}else{
+    $sql1="INSERT INTO ciudadanonacional SET id_ciudadano=null, 
                                         nombre1='".strtoupper($nombre1)."',
                                         nombre2='".strtoupper($nombre2)."',
                                         appaterno='".strtoupper($appaterno)."',
@@ -36,12 +52,14 @@ $sql1="INSERT INTO ciudadanonacional SET id_ciudadano=null,
                                         genero='".$genero."'
                                          ";
 $ejecutar_insercion = mysqli_query($conexion, $sql1);
+
 if($ejecutar_insercion == 1){
     $cantidad = mysqli_query($conexion, "SELECT id_ciudadano FROM ciudadanonacional WHERE nrodocumento='".$nrodocumento."' ");
     $ejecucion_cantidad = mysqli_fetch_array($cantidad);
     $nrodocumento = $ejecucion_cantidad['id_ciudadano'];
 
-    $sql = "INSERT INTO solicitudes SET esfm_postula='".$esfm_postula."',
+    $sql = "INSERT INTO solicitudes SET 
+                                        esfm_postula='".$esfm_postula."',
                                         idioma='".$idioma."',
                                         modalidad='".$modalidad."',
                                         user_update='".$id_usuario."',
@@ -49,5 +67,7 @@ if($ejecutar_insercion == 1){
                                         ";
     echo $ejecutar_insercion = mysqli_query($conexion, $sql);
 }
+}
+
   
 ?>

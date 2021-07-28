@@ -85,6 +85,7 @@ $(document).ready(function () {
                     respuesta = jQuery.parseJSON(respuesta);
                     
                     if (typeof respuesta == "object") {
+                        $('#id_ciudadano').val(respuesta[0]['id_ciudadano']);
                         $('#nombre1').val(respuesta[0]['nombre1']);
                         $('#nombre2').val(respuesta[0]['nombre2']);
                         $('#appaterno').val(respuesta[0]['appaterno']);

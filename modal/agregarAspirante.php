@@ -33,7 +33,29 @@ $nivel = mysqli_query($conexion, $nivel_consulta);
       </div>
       <div class="modal-body">
         <div class="row">
+          <div class="form-group col-md-6">
+            <label for="squareInput">Nro Identificacion</label>
+            <input type="text" class="form-control" id="id_ciudadano" name="id_ciudadano">
+            <input type="number" class="form-control input-square" id="nrodocumento" name="nrodocumento" placeholder="Cedula de Identidad" pattern="^[0-9]+" required="">
+          </div>
+            <div class="form-group col-md-6">
+              <label for="squareSelect">Expedido en</label>
+              
+              <select class="form-control input-square" id="expedido_en" name="expedido_en">
+                  <?php
+                  while ($row = mysqli_fetch_array($expedido_en)) {
+                      ?>
+                      <option value="<?php echo $row['id_departamento'] ?>"><?php echo $row['nombre_departamento'] ?></option>
+                      <?php
+                  }
+                  ?>
+              </select>
+          </div>
+        </div>
+        <div class="row">
+
           <div class="col-md-3">
+            
             <label for="nombre1">Nombre 1</label>
             <input type="text" class="form-control" id="nombre1" name="nombre1" placeholder="Primer Nombre" required="" pattern="[A-Za-z]{2,30}" >
           </div>
@@ -51,28 +73,12 @@ $nivel = mysqli_query($conexion, $nivel_consulta);
           </div>
         </div>
         <div class="row">
-          <div class="form-group col-md-3">
-            <label for="squareInput">Nro Identificacion</label>
-            <input type="number" class="form-control input-square" id="nrodocumento" name="nrodocumento" placeholder="Cedula de Identidad" pattern="^[0-9]+" required="">
-          </div>
-            <div class="form-group col-md-3">
-              <label for="squareSelect">Expedido en</label>
-              
-              <select class="form-control input-square" id="expedido_en" name="expedido_en">
-                  <?php
-                  while ($row = mysqli_fetch_array($expedido_en)) {
-                      ?>
-                      <option value="<?php echo $row['id_departamento'] ?>"><?php echo $row['nombre_departamento'] ?></option>
-                      <?php
-                  }
-                  ?>
-              </select>
-          </div>
-          <div class="form-group col-md-3">
+          
+          <div class="form-group col-md-6">
             <label for="squareInput">Fecha Nacimiento</label>
             <input type="date" step="1" min="1940-01-01" value="<?php echo date("Y-m-d");?>" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control input-square" >
           </div>
-          <div class="form-group col-md-3">
+          <div class="form-group col-md-6">
               <label for="squareSelect">Genero</label>
               <select class="form-control input-square" id="genero" name="genero" >
               <option selected>Seleccionar...</option>
